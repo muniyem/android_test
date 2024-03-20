@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="moviesItem"
+            type="com.example.androidtest.models.MoviesItem" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_6sdp"
+        android:id="@+id/cv_item">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="horizontal"
+            android:padding="@dimen/_5sdp"
+            android:weightSum="6">
+
+            <ImageView
+                android:id="@+id/iv_category_icon"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_22sdp"
+                android:layout_weight="0.5"
+                imageUrl="@{moviesItem.getImageURL}"
+
+                android:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:id="@+id/tv_category_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_weight="4"
+                android:singleLine="true"
+                android:text="@{moviesItem.title}"
+                tools:text="General Practitioner"
+                android:textColor="@color/black" />
+
+
+            <TextView
+                android:id="@+id/tv_category_price"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1.5"
+                android:gravity="right"
+                android:singleLine="true"
+                android:text="@{moviesItem.release_date}"
+                tools:text="RS. 100"
+                android:textColor="@color/black" />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>
