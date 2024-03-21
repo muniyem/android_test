@@ -9,8 +9,8 @@ import com.example.androidtest.models.MoviesItem
 
 @Dao
 interface MovieDao {
-    @Query("SELECT * FROM MoviesTable")
-    fun getAllMovies(): List<MoviesTable>
+    @Query("SELECT * FROM MoviesItem")
+    fun getAllMovies(): List<MoviesItem>
 
 //    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
 //    fun loadAllByIds(userIds: IntArray): List<MoviesItem>
@@ -20,8 +20,8 @@ interface MovieDao {
 //    fun findByName(first: String, last: String): MoviesItem
 
     @Insert
-    fun insertAll(vararg movies: MoviesTable)
+    fun insertAll(vararg movies: MoviesItem)
 
     @Delete
-    fun delete(movieItem: MoviesTable)
+    fun delete(movieItem: MoviesItem)
 }

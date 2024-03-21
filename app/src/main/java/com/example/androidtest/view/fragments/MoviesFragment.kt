@@ -16,7 +16,6 @@ import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.adapters.MoviesAdapter
 import com.example.androidtest.database.GetDataBaseInstance
-import com.example.androidtest.database.MoviesTable
 import com.example.androidtest.databinding.FragmentMoviesListBinding
 import com.example.androidtest.helpers.NetworkConnection
 import com.example.androidtest.models.MoviesItem
@@ -72,6 +71,7 @@ class MoviesFragment : Fragment() {
         _binding?.listOfMovies?.layoutManager = LinearLayoutManager(requireContext())
         _binding?.listOfMovies?.setHasFixedSize(true)
         _binding?.listOfMovies?.adapter = adapterMovies!!
+        if (NetworkConnection.isNetworkAvailable(requireContext())) {
 
         viewModel.viewModelScope.launch {
             viewModel.listMovies.collect {
@@ -81,11 +81,9 @@ class MoviesFragment : Fragment() {
             }
         }
 
-
-        if (NetworkConnection.isNetworkAvailable(requireContext())) {
             adapterMovies?.snapshot()?.items?.forEachIndexed(){index, element->
                 GetDataBaseInstance.getRoomDataBase(requireContext())?.movieDao()?.insertAll(
-                    MoviesTable
+                    MoviesItem
                         (
                         element.adult,
                         element.backdrop_path,
@@ -101,8 +99,7 @@ class MoviesFragment : Fragment() {
                 )
             }
         } else {
-            val movielist =
-                GetDataBaseInstance.getRoomDataBase(requireContext())?.movieDao()?.getAllMovies()
+            val movielist = GetDataBaseInstance.getRoomDataBase(requireContext())?.movieDao()?.getAllMovies()
             Log.d("NO_Connection", movielist.toString())
         }
 

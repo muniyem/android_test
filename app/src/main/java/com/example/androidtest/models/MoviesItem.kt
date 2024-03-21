@@ -25,6 +25,20 @@ data class MoviesItem(
     val vote_count: Int
 ){
     constructor() : this( false,"",0,"","","",0.0,"","","",false,0.0,0)
+    constructor(
+        adult: Boolean,
+        backdropPath: String,
+        id: Int,
+        originalLanguage: String,
+        originalTitle: String,
+        overview: String,
+        popularity: Double,
+        posterPath: String,
+        releaseDate: String,
+        title: String
+    ) : this(
+
+    )
 
     val getImageURL: String
         get() = Constants.IMAGE_BASE_URL+poster_path

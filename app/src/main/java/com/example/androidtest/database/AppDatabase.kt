@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.example.androidtest.models.Movies
 import com.example.androidtest.models.MoviesItem
 
-@Database(entities = [MoviesTable::class], version = 2)
+@Database(entities = [MoviesItem::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
 }
