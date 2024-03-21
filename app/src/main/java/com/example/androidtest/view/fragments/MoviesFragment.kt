@@ -1,6 +1,7 @@
-package com.example.androidtest.view
+package com.example.androidtest.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.paging.flatMap
+import androidx.paging.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.adapters.MoviesAdapter
+import com.example.androidtest.database.GetDataBaseInstance
+import com.example.androidtest.database.MoviesTable
 import com.example.androidtest.databinding.FragmentMoviesListBinding
 import com.example.androidtest.helpers.NetworkConnection
 import com.example.androidtest.models.MoviesItem
@@ -48,7 +53,7 @@ class MoviesFragment : Fragment() {
         }
         return binding?.root
     }
-
+//  private lateinit  var moviesItem: MoviesItem
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,16 +73,40 @@ class MoviesFragment : Fragment() {
         _binding?.listOfMovies?.setHasFixedSize(true)
         _binding?.listOfMovies?.adapter = adapterMovies!!
 
+        viewModel.viewModelScope.launch {
+            viewModel.listMovies.collect {
+
+                adapterMovies?.submitData(lifecycle, it)
+
+            }
+        }
+
+
         if (NetworkConnection.isNetworkAvailable(requireContext())) {
-            viewModel.viewModelScope.launch {
-                viewModel.listMovies.collect {
-
-                    adapterMovies?.submitData(lifecycle, it)
-
-                }
+            adapterMovies?.snapshot()?.items?.forEachIndexed(){index, element->
+                GetDataBaseInstance.getRoomDataBase(requireContext())?.movieDao()?.insertAll(
+                    MoviesTable
+                        (
+                        element.adult,
+                        element.backdrop_path,
+                        element.id,
+                        element.original_language,
+                        element.original_title,
+                        element.overview,
+                        element.popularity,
+                        element.poster_path,
+                        element.release_date,
+                        element.title,
+                    )
+                )
             }
         } else {
+            val movielist =
+                GetDataBaseInstance.getRoomDataBase(requireContext())?.movieDao()?.getAllMovies()
+            Log.d("NO_Connection", movielist.toString())
         }
+
+
 
 
 

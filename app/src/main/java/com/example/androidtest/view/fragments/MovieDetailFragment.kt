@@ -1,4 +1,4 @@
-package com.example.androidtest.view
+package com.example.androidtest.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,19 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.navArgs
-import androidx.paging.LoadState
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.androidtest.adapters.MoviesAdapter
 import com.example.androidtest.databinding.FragmentMovieDetailBinding
-import com.example.androidtest.databinding.FragmentMoviesListBinding
-import com.example.androidtest.models.MoviesItem
 import com.example.androidtest.view.view_models.MovieDetailViewModel
-import com.example.androidtest.view.view_models.MoviesListViewModel
 import com.example.androidtest.view.view_models.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 /**
  * A fragment representing a list of Items.
