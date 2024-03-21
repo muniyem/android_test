@@ -31,12 +31,12 @@ class MoviesAdapter(private val listener: OnItemClickListener?) :
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movieItem: MoviesItem, listener: OnItemClickListener?) {
             binding.moviesItem = movieItem
-//
-//            binding.cvItem.setOnClickListener {
-//                listener?.onItemClick(
-//                    telemedicineMedicine
-//                )
-//            }
+
+            binding.cvItem.setOnClickListener {
+                listener?.onItemClick(
+                    movieItem
+                )
+            }
         }
     }
     companion object {

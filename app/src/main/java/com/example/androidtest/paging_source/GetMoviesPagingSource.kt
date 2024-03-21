@@ -2,6 +2,7 @@ package com.example.androidtest.paging_source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.androidtest.constants.Constants
 import com.example.androidtest.models.MoviesItem
 import com.example.androidtest.repo.MoviesRemoteRepository
 import java.lang.Exception
@@ -25,7 +26,7 @@ class GetMoviesPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MoviesItem> {
         return try {
             val position = params.key ?:1
-            val response = repository.getMoviesList("$authToken","en-US",position)
+            val response = repository.getMoviesList("$authToken", Constants.LANGUAGE,position)
 
             return LoadResult.Page(
                 data = response?.body()?.results!!,

@@ -9,5 +9,22 @@
         android:id="@+id/moviesFragment"
         android:name="com.example.androidtest.view.MoviesFragment"
         android:label="fragment_movies_list"
-        tools:layout="@layout/fragment_movies_list" />
+        tools:layout="@layout/fragment_movies_list">
+        <action
+            android:id="@+id/action_moviesFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.androidtest.view.MovieDetailFragment"
+        android:label="MovieDetailFragment">
+
+<!--        <argument-->
+<!--            android:name= "MovieItem"-->
+<!--            app:argType="com.example.androidtest.models.MovieItem" />-->
+
+        <action
+            android:id="@+id/action_movieDetailFragment_to_moviesFragment"
+            app:destination="@id/moviesFragment" />
+    </fragment>
 </navigation>

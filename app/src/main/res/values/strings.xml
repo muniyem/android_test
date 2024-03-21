@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Android Test</string>
+    <string name="moviemodel">movieModel</string>
+    <string name="status">status: %1$s </string>
+    <string name="releaseDate">release Date: %1$s </string>
+    <string name="originalLanguage">original Language: %1$s </string>
+    <string name="plot">plot: \n  %1$s </string>
+    <string name="search">Search</string>
+
 </resources>
