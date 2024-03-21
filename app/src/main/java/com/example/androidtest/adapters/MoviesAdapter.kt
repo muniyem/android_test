@@ -11,6 +11,11 @@ import com.example.androidtest.models.MoviesItem
 class MoviesAdapter(private val listener: OnItemClickListener?) :
     PagingDataAdapter<MoviesItem, MoviesAdapter.ViewHolder>(COMPARATOR) {
 
+    private val mItems: ArrayList<MoviesItem>? = null
+    fun getItems(): List<MoviesItem?>? {
+        return mItems
+    }
+
 
     private lateinit var binding: FragmentMoviesItemBinding
 

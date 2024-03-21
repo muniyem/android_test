@@ -1,8 +1,6 @@
 package com.example.androidtest.view
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +13,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidtest.adapters.MoviesAdapter
 import com.example.androidtest.databinding.FragmentMoviesListBinding
+import com.example.androidtest.helpers.NetworkConnection
 import com.example.androidtest.models.MoviesItem
 import com.example.androidtest.view.view_models.MoviesListViewModel
 import com.example.androidtest.view.view_models.SharedViewModel
@@ -69,28 +68,18 @@ class MoviesFragment : Fragment() {
         _binding?.listOfMovies?.setHasFixedSize(true)
         _binding?.listOfMovies?.adapter = adapterMovies!!
 
+        if (NetworkConnection.isNetworkAvailable(requireContext())) {
+            viewModel.viewModelScope.launch {
+                viewModel.listMovies.collect {
 
-        viewModel.viewModelScope.launch {
-            viewModel.listMovies.collect {
-                adapterMovies?.submitData(lifecycle, it)
+                    adapterMovies?.submitData(lifecycle, it)
+
+                }
             }
+        } else {
         }
 
-        binding?.editSearch?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Not used
-            }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Filter the data based on the entered text
-                filterData(s.toString())
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                // Not used
-            }
-        })
 
 
         adapterMovies?.addLoadStateListener { combinedLoadStates ->
@@ -103,11 +92,4 @@ class MoviesFragment : Fragment() {
             }
         }
     }
-
-//    private fun filterData(query: String) {
-//        val filteredData = originalData.filter { it.contains(query, ignoreCase = true) }
-//        adapter.clear()
-//        adapter.addAll(filteredData)
-//        adapter.notifyDataSetChanged()
-//    }
 }
