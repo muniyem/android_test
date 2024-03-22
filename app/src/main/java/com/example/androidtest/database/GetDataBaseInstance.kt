@@ -6,7 +6,6 @@ import androidx.room.Room.databaseBuilder
 object GetDataBaseInstance {
 
     private var myDatabase: AppDatabase? = null
-//    private fun GetDataBaseInstance() {}
 
     fun getRoomDataBase(context: Context?): AppDatabase? {
         if (myDatabase == null) {

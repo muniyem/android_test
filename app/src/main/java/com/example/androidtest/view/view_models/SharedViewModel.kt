@@ -4,12 +4,9 @@ import androidx.lifecycle.ViewModel
    
 class SharedViewModel : ViewModel() { 
    
-    // variable to contain message whenever 
-    // it gets changed/modified(mutable) 
-    val MovieId = MutableLiveData<Int>()
+    val movieId = MutableLiveData<Int>()
    
-    // function to send message 
     fun sendMovieId(id: Int) {
-        MovieId.value = id
+        movieId.value = id
     } 
 }

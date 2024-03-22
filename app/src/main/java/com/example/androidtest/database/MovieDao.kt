@@ -1,6 +1,5 @@
 package com.example.androidtest.database
 
-import androidx.paging.PagingData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -12,16 +11,15 @@ interface MovieDao {
     @Query("SELECT * FROM MoviesItem")
     fun getAllMovies(): List<MoviesItem>
 
-//    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
-//    fun loadAllByIds(userIds: IntArray): List<MoviesItem>
-//
-//    @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-//           "last_name LIKE :last LIMIT 1")
-//    fun findByName(first: String, last: String): MoviesItem
+    @Query("SELECT * FROM MoviesItem WHERE title LIKE '%' || :search_query || '%'")
+    fun getFilteredMovies(search_query: String?): List<MoviesItem>
 
     @Insert
     fun insertAll(vararg movies: MoviesItem)
 
     @Delete
     fun delete(movieItem: MoviesItem)
+
+    @Query("DELETE FROM MoviesItem")
+    fun moviesItemTable()
 }

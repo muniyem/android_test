@@ -4,9 +4,6 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.os.Parcel
-import android.os.Parcelable
-import androidx.lifecycle.LiveData
 
 object  NetworkConnection  {
     fun isNetworkAvailable(context: Context?): Boolean {

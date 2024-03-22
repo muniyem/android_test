@@ -1,10 +1,5 @@
 package com.example.androidtest.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-//import com.example.androidtest.database.DataConverters
-
 
 data class Movies(
     val page: Int,

@@ -14,8 +14,8 @@ interface MoviesAPI {
         @Query("page") page: Int?
     ): Response<Movies>?
 
-    suspend  @GET("{movie_id}")
-     fun getMovieDetail(
+    @GET("{movie_id}")
+    suspend fun getMovieDetail(
         @Header(Constants.HEADER) header: String?,
         @Path("movie_id") movieId: Int?,
         @Query("language") language: String?

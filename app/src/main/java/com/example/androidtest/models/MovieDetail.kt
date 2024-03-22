@@ -30,7 +30,6 @@ data class MovieDetail(
     val vote_count: Int
 ){
 
-//    val genresListToString = genres.joinToString { it -> "Genre ${it.name}" }
 
     val genresListToString :String
         get() = genres.joinToString(separator = ","){it -> "Genre: ${it.name}" }

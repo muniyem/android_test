@@ -24,8 +24,8 @@ class MoviesListViewModel @Inject constructor(
         }
     ).flow
 
-    val listMovies = getMovies().cachedIn(viewModelScope)
-
+    val listMovies = getMovies()
+        .cachedIn(viewModelScope)
 
 
 
